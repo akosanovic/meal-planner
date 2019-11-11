@@ -1,3 +1,4 @@
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { EmptyHolderComponent } from './recipes/empty-holder/empty-holder.component';
 import { NgModule } from "@angular/core"
@@ -9,7 +10,9 @@ const routes: Routes = [
 	{path: '', redirectTo: 'shopping-list', pathMatch: 'full'},
 	{path: 'recipes', component: RecipesComponent, children: [
 		{path: '', component: EmptyHolderComponent},
-		{path: ':id', component: RecipeDetailComponent}
+		{path: 'new', component: RecipeEditComponent},
+		{path: ':id', component: RecipeDetailComponent},
+		{path: ':id/edit', component: RecipeEditComponent},
 	]},
 	{path: 'shopping-list', component: ShoppingListComponent}
 ]

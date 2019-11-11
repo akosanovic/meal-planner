@@ -1,3 +1,5 @@
+import { RecipeService } from './recipes/recipe.service';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -28,13 +30,17 @@ import { EmptyHolderComponent } from './recipes/empty-holder/empty-holder.compon
     ShoppingEditComponent,
     DropdownDirective,
     EmptyHolderComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [ShoppingListService],
+  providers: [
+    ShoppingListService,
+    RecipeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
