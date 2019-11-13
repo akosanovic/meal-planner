@@ -1,3 +1,4 @@
+import { PlannerComponent } from './planner/planner.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { EmptyHolderComponent } from './recipes/empty-holder/empty-holder.component';
@@ -7,7 +8,8 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const routes: Routes = [
-	{path: '', redirectTo: 'shopping-list', pathMatch: 'full'},
+	{path: '', redirectTo: 'planner', pathMatch: 'full'},
+	{path: 'planner', component: PlannerComponent},
 	{path: 'recipes', component: RecipesComponent, children: [
 		{path: '', component: EmptyHolderComponent},
 		{path: 'new', component: RecipeEditComponent},
