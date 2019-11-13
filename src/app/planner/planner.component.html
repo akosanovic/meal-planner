@@ -1,1 +1,13 @@
-<p>planner works!</p>
+
+<div class="card-columns">
+	<div class="card" *ngFor='let dish of planner'>
+		<img src="{{dish.image}}" class="card-img" alt="...">
+		<div class="card-img-overlay">
+
+		</div>
+		<div class="card-footer text-muted">
+			<h3>{{dish.meal}} </h3>
+			<p class="card-text">{{dish.name}}</p>
+		</div>
+	</div>
+</div>

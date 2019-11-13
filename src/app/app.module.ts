@@ -18,6 +18,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { EmptyHolderComponent } from './recipes/empty-holder/empty-holder.component';
 import { PlannerComponent } from './planner/planner.component';
+import { WeeklyComponent } from './planner/weekly/weekly.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PlannerComponent } from './planner/planner.component';
     DropdownDirective,
     EmptyHolderComponent,
     RecipeEditComponent,
-    PlannerComponent
+    PlannerComponent,
+    WeeklyComponent
   ],
   imports: [
     BrowserModule,
