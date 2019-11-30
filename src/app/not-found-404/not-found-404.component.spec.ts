@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmptyHolderComponent } from './empty-holder.component';
+import { NotFound404Component } from './not-found-404.component';
 
-describe('EmptyHolderComponent', () => {
-  let component: EmptyHolderComponent;
-  let fixture: ComponentFixture<EmptyHolderComponent>;
+describe('NotFound404Component', () => {
+  let component: NotFound404Component;
+  let fixture: ComponentFixture<NotFound404Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptyHolderComponent ]
+      declarations: [ NotFound404Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmptyHolderComponent);
+    fixture = TestBed.createComponent(NotFound404Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

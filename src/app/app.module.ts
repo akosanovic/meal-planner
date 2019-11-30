@@ -16,10 +16,10 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
-import { EmptyHolderComponent } from './recipes/empty-holder/empty-holder.component';
 import { PlannerComponent } from './planner/planner.component';
 import { WeeklyComponent } from './planner/weekly/weekly.component';
 import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
+import { NotFound404Component } from './not-found-404/not-found-404.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +32,11 @@ import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-pla
     ShoppingListComponent,
     ShoppingEditComponent,
     DropdownDirective,
-    EmptyHolderComponent,
     RecipeEditComponent,
     PlannerComponent,
     WeeklyComponent,
-    EmptyPlaceholderComponent
+    EmptyPlaceholderComponent,
+    NotFound404Component
   ],
   imports: [
     BrowserModule,

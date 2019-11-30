@@ -1,6 +1,6 @@
 <!--  TODO: fix router link for planner  -->
 <a class="card"
-  [routerLink]=[index]
+  [routerLink]="[ '/recipe', index]"
   [routerLinkActive]="'active'">
 
   <img src="{{recipe.imagePath}}" class="card-img" alt="{{ recipe.name }}">
