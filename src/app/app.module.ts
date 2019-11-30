@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { EmptyHolderComponent } from './recipes/empty-holder/empty-holder.component';
 import { PlannerComponent } from './planner/planner.component';
 import { WeeklyComponent } from './planner/weekly/weekly.component';
+import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { WeeklyComponent } from './planner/weekly/weekly.component';
     EmptyHolderComponent,
     RecipeEditComponent,
     PlannerComponent,
-    WeeklyComponent
+    WeeklyComponent,
+    EmptyPlaceholderComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { WeeklyComponent } from './planner/weekly/weekly.component';
     ShoppingListService,
     RecipeService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EmptyPlaceholderComponent]
 })
 export class AppModule { }

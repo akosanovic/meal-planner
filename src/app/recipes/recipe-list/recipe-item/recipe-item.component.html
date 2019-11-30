@@ -1,16 +1,14 @@
-<a
-  class="list-group-item clearfix"
+<!--  TODO: fix router link for planner  -->
+<a class="card"
   [routerLink]=[index]
   [routerLinkActive]="'active'">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-    <p class="list-group-item-text">{{ recipe.description }}</p>
+
+  <img src="{{recipe.imagePath}}" class="card-img" alt="{{ recipe.name }}">
+  <div class="card-img-overlay">
+
   </div>
-  <span class="pull-right">
-        <img
-          [src]="recipe.imagePath"
-          alt="{{ recipe.name }}"
-          class="img-responsive"
-          style="max-height: 50px;">
-      </span>
+  <div class="card-footer text-muted">
+    <h4 class="card-title">{{ recipe.name }}</h4>
+    <p class="card-text">{{recipe.description}}</p>
+  </div>
 </a>
