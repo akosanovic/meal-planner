@@ -1,5 +1,5 @@
 import { Recipe } from './../../recipes/recipe.model';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-empty-placeholder',
@@ -7,13 +7,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./empty-placeholder.component.css']
 })
 export class EmptyPlaceholderComponent implements OnInit {
-  @Input() dropdownOptions: Recipe[];
+  public isOpen = false;
+
+  @Input() dropdownOptions: Recipe[] = [];
   @Input() meal: 'breakfast' | 'lunch' | 'dinner' = 'breakfast';
   @Output() optionSelected = new EventEmitter();
+
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleDropdown() {
+    this.isOpen = !this.isOpen;
   }
 
   selectedOption(option) {

@@ -9,11 +9,12 @@ import { Recipe } from '../../recipe.model';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
-  @Input() index: number;
+  id: number = 0;
 
   constructor() { }
 
   ngOnInit() {
+    this.id = this.recipe.id;
   }
 
 

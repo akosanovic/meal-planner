@@ -10,6 +10,7 @@ export class RecipeService {
 
   recipes: Recipe[] = [
     new Recipe(
+      0,
       'Kuvana spelta sa sirom i sunkom',
       'lorem ipsum dolorem',
       'https://hronokuhinja.rs/wp-content/uploads/2014/09/Spelta-sa-svapskim-sirom-i-slaninom.jpg',
@@ -17,6 +18,7 @@ export class RecipeService {
       'breakfast'
     ),
     new Recipe(
+      1,
       'Junetina dinstana sa povrćem',
       'lorem ipsum',
       'https://hronokuhinja.rs/wp-content/uploads/2017/06/Vojvodjanski-gulas-s.jpg',
@@ -24,6 +26,7 @@ export class RecipeService {
       'lunch'
     ),
     new Recipe(
+      3,
       'Belo meso sa grilovanim tikvicam',
       'lorem ipsum,...',
       'https://hronokuhinja.rs/wp-content/uploads/2018/11/Kotleti-2-s.jpg',
@@ -31,6 +34,7 @@ export class RecipeService {
       'dinner'
     ),
     new Recipe(
+      5,
       'Tasty Schnitzel',
       'A super-tasty Schnitzel - just awesome!',
       'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
@@ -40,7 +44,9 @@ export class RecipeService {
       ],
       'lunch'
       ),
-    new Recipe('Big Fat Burger',
+    new Recipe(
+      2,
+      'Big Fat Burger',
       'What else you need to say?',
       'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
       [
@@ -56,8 +62,10 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  getRecipeById(index: number) {
-    return this.recipes[index];
+  getRecipeById(id: number) {
+    return this.recipes.find( (recipe) => {
+      return recipe.id === id;
+    })
   }
 
   getDailyPlanner(): DailyPlanner {
