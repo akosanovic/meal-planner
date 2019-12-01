@@ -80,4 +80,13 @@ export class RecipeService {
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredients(ingredients);
   }
+
+  deleteRecipe(recipeToDelete: Recipe) {
+    this.recipes = this.recipes.filter( (recipe) => {
+      console.log(recipe.id !== recipe.id);
+
+      return recipe.id !== recipeToDelete.id;
+    });
+    console.log('recipes ', this.recipes);
+  }
 }
