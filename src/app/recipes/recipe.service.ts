@@ -81,6 +81,11 @@ export class RecipeService {
     this.slService.addIngredients(ingredients);
   }
 
+  addNewRecipe(recipe: Recipe) {
+    this.recipes = this.recipes.concat(recipe);
+    console.log('recipes updated', this.recipes);
+  }
+
   deleteRecipe(recipeToDelete: Recipe) {
     this.recipes = this.recipes.filter( (recipe) => {
       console.log(recipe.id !== recipe.id);

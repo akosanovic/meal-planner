@@ -6,11 +6,9 @@ import { Directive, HostListener, HostBinding, ElementRef, Renderer2, OnDestroy 
 })
 
 export class DropdownDirective implements OnDestroy{
-  // @HostBinding() isOpen = false;
   nativeEl = null;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
-
   }
 
   @HostListener('click') toggleDropdown() {

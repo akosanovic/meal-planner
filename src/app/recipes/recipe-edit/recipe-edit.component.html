@@ -1,1 +1,59 @@
-<p>recipe-edit works!</p>
+
+<form [formGroup]='recipeForm' (ngSubmit)='onFormSubmit()'>
+	<h2 class="card-header">
+		<div class="row">
+			<div class="col-sm-12">
+				<input class="form-control" type="text" name="name" id="" placeholder='Recipe Name'	[formControlName]="'name'">
+			</div>
+		</div>
+	</h2>
+
+
+	<div class="card-body">
+				<!-- Image:: START -->
+
+		<div class="form-group">
+			<label for="imageUrl">
+				<img src="{{recipeForm.value.imageUrl}}" alt="" class="card-img">
+			</label>
+			<input class="form-control" name="imageUrl" id='imageUrl' placeholder="Image"	[formControlName]="'imageUrl'">
+		</div>
+
+		<ng-container [formArrayName]="'ingredients'">
+				<h3 class="card-title">Ingredients: </h3>
+
+				<div class="row"  *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index" [formGroupName]="i">
+						<div class="col-sm-8">
+
+								<input type='text' class="form-control" [formControlName]='"ingredient-name"' name="ingredient-name" placeholder="Ingredient name">
+						</div>
+						<div class="col-sm-2">
+								<input type='number' class="form-control" [formControlName]='"ingredient-amount"' name="ingredient-amount" placeholder="Ingredient amount">
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-danger">X</button>
+						</div>
+					</div>
+		</ng-container>
+
+
+
+		<h3 class="card-title">Instructions: </h3>
+		<div class="row">
+			<div class="col-sm-12">
+				<textarea type='text' class="form-control" name="instructions" placeholder="Instructions" rows="6"
+									[formControlName]="'instructions'"></textarea>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-sm-12">
+				<button class="btn btn-default">Cancel</button>
+				<button class="btn btn-primary" type="submit">Save</button>
+			</div>
+		</div>
+
+
+	</div>
+</form>
