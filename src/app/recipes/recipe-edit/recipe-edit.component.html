@@ -22,7 +22,7 @@
 		<ng-container [formArrayName]="'ingredients'">
 				<h3 class="card-title">Ingredients: </h3>
 
-				<div class="row"  *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index" [formGroupName]="i">
+				<div class="row"  *ngFor="let ingredient of recipeForm.get('ingredients')['controls']; let i = index" [formGroupName]="i">
 						<div class="col-sm-8">
 
 								<input type='text' class="form-control" [formControlName]='"ingredient-name"' name="ingredient-name" placeholder="Ingredient name">
