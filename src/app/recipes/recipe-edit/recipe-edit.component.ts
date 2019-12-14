@@ -24,14 +24,13 @@ export class RecipeEditComponent implements OnInit {
     this.route.url.pipe(map(segments => segments.join('/'))).subscribe(url => {
       console.log('url ', url.includes('edit'));
       this.isEditMode = url.includes('edit');
-    })
-
+    });
 
     this.route.params.subscribe( (params: Params) => {
       const recipeId = Number(params['id']);
       console.log('param', recipeId)
       this.recipe = this.recipeService.getRecipeById(recipeId);
-    })
+    });
 
 
     this.initForm();

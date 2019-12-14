@@ -1,12 +1,16 @@
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-success" [routerLink]="['/recipe', 'new']">New Recipe</button>
+<div class="card-header">
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-success" [routerLink]="['/recipe', 'new']">New Recipe</button>
+    </div>
   </div>
 </div>
-<hr>
-<div class="row">
-  <div class="col-xs-12">
-    <app-recipe-item
-      *ngFor="let recipeEl of recipes; let i = index" [recipe]="recipeEl"></app-recipe-item>
+
+
+<div class="card-body">
+  <div class="row">
+    <div class="col-sm-4"  *ngFor="let recipeEl of recipes; let i = index">
+      <app-recipe-item [recipe]="recipeEl"></app-recipe-item>
+    </div>
   </div>
 </div>

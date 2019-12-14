@@ -1,3 +1,6 @@
+.wrapper {
+	background-color: #292c30;
+}
 .container {
-	margin-top: 45px;
+	padding-top: 45px;
 }
