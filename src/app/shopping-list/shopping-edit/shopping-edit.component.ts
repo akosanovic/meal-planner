@@ -1,10 +1,6 @@
 import { NgForm } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
@@ -14,13 +10,29 @@ import { ShoppingListService } from '../shopping-list.service';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
-  @ViewChild('nameInput', { static: false }) nameInputRef: ElementRef;
-  @ViewChild('amountInput', { static: false }) amountInputRef: ElementRef;
+export class ShoppingEditComponent implements OnInit, OnDestroy {
+  @ViewChild('shoppingListForm', {static: false}) ShoppingListForm: NgForm;
+
+  subscription: Subscription;
+  editingIngredient: Ingredient;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
+    this.subscription = this.shoppingListService.ingredientSelected.subscribe((index: number) => {
+      // Get Selected Ingredients Detials
+      this.editingIngredient = this.shoppingListService.getIngredientById(index);
+      // Display value in the Shopping List Form
+      this.ShoppingListForm.setValue({
+        'name': this.editingIngredient.name,
+        'amount': this.editingIngredient.amount
+      })
+
+    })
   }
 
   onAddItem(form: NgForm) {
