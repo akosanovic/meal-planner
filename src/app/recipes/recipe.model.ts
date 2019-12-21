@@ -8,12 +8,12 @@ export class Recipe {
   public ingredients: Ingredient[];
   public meal: String[] | string;
 
-  constructor(id: number, name: string, desc: string, imagePath: string, ingredients: Ingredient[], meal: String[] | string) {
-    this.id = id;
-    this.name = name;
-    this.description = desc;
-    this.imagePath = imagePath;
-    this.ingredients = ingredients;
-    this.meal = meal;
+  constructor(recipe) {
+    this.id = Math.floor(Math.random() * 10000);
+    this.name = recipe.name;
+    this.description = recipe.description;
+    this.imagePath = recipe.imagePath;
+    this.ingredients = recipe.ingredients;
+    this.meal = recipe.meal;
   }
 }

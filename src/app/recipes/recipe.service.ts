@@ -1,3 +1,4 @@
+import { Subject, BehaviorSubject } from 'rxjs';
 import { DailyPlanner } from './../shared/models/daily-planner';
 import { EventEmitter, Injectable } from '@angular/core';
 
@@ -9,52 +10,54 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 export class RecipeService {
 
   recipes: Recipe[] = [
-    new Recipe(
-      0,
-      'Kuvana spelta sa sirom i sunkom',
-      'lorem ipsum dolorem',
-      'https://hronokuhinja.rs/wp-content/uploads/2014/09/Spelta-sa-svapskim-sirom-i-slaninom.jpg',
-      [],
-      'breakfast'
-    ),
-    new Recipe(
-      1,
-      'Junetina dinstana sa povrćem',
-      'lorem ipsum',
-      'https://hronokuhinja.rs/wp-content/uploads/2017/06/Vojvodjanski-gulas-s.jpg',
-      [],
-      'lunch'
-    ),
-    new Recipe(
-      3,
-      'Belo meso sa grilovanim tikvicam',
-      'lorem ipsum,...',
-      'https://hronokuhinja.rs/wp-content/uploads/2018/11/Kotleti-2-s.jpg',
-      [],
-      'dinner'
-    ),
-    new Recipe(
-      5,
-      'Tasty Schnitzel',
-      'A super-tasty Schnitzel - just awesome!',
-      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
-      [
+    new Recipe({
+      name       : 'Kuvana spelta sa sirom i sunkom',
+      description: 'lorem ipsum dolorem',
+      imagePath  : 'https://hronokuhinja.rs/wp-content/uploads/2014/09/Spelta-sa-svapskim-sirom-i-slaninom.jpg',
+      ingredients: [],
+      meal: ['breakfast']
+    }),
+
+    new Recipe({
+      name       : 'Junetina dinstana sa povrćem',
+      description: 'lorem ipsum dolorem',
+      imagePath  : 'https://hronokuhinja.rs/wp-content/uploads/2017/06/Vojvodjanski-gulas-s.jpg',
+      ingredients: [],
+      meal: ['lunch']
+    }),
+
+    new Recipe({
+      name       : 'Belo meso sa grilovanim tikvicam',
+      description: 'lorem ipsum dolorem',
+      imagePath  : 'https://hronokuhinja.rs/wp-content/uploads/2018/11/Kotleti-2-s.jpg',
+      ingredients: [],
+      meal: ['dinner']
+    }),
+
+    new Recipe({
+      name       : 'Tasty Schnitzel',
+      description: 'A super-tasty Schnitzel - just awesome!',
+      imagePath  : 'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+      ingredients: [
         new Ingredient('Meat', 1),
         new Ingredient('French Fries', 20)
       ],
-      'lunch'
-      ),
-    new Recipe(
-      2,
-      'Big Fat Burger',
-      'What else you need to say?',
-      'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
-      [
+      meal: ['lunch']
+    }),
+
+    new Recipe({
+      name       : 'Big Fat Burger',
+      description: 'What else you need to say?',
+      imagePath  : 'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
+      ingredients: [
         new Ingredient('Buns', 2),
         new Ingredient('Meat', 1)
       ],
-      'dinner')
+      meal: ['dinner']
+    }),
   ];
+
+  recipesUpdated: BehaviorSubject<Recipe[]> =  new BehaviorSubject<Recipe[]>(this.recipes.slice());
 
   constructor(private slService: ShoppingListService) {}
 
@@ -65,7 +68,7 @@ export class RecipeService {
   getRecipeById(id: number) {
     return this.recipes.find( (recipe) => {
       return recipe.id === id;
-    })
+    });
   }
 
   getDailyPlanner(): DailyPlanner {
@@ -82,8 +85,12 @@ export class RecipeService {
   }
 
   addNewRecipe(recipe: Recipe) {
-    this.recipes = this.recipes.concat(recipe);
-    console.log('recipes updated', this.recipes);
+   this.recipes.unshift(recipe);
+   this.recipesUpdated.next(this.recipes);
+  }
+
+  updateRecipe(index, recipe: Recipe) {
+
   }
 
   deleteRecipe(recipeToDelete: Recipe) {

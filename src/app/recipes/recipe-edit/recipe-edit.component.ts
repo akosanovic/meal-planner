@@ -51,15 +51,15 @@ export class RecipeEditComponent implements OnInit {
   }
 
   initForm() {
-    let recipeName = '';
-    let imageUrl = 'https://via.placeholder.com/1000x500';
-    let instructions = '';
+    let name = '';
+    let imagePath = 'https://via.placeholder.com/1000x500';
+    let description = '';
     let recipeIngredients = new FormArray([])
 
     if (this.isEditMode) {
-      recipeName   = this.recipe.name;
-      imageUrl     = this.recipe.imagePath;
-      instructions = this.recipe.description;
+      name   = this.recipe.name;
+      imagePath     = this.recipe.imagePath;
+      description = this.recipe.description;
       console.log('recipe ingredients', this.recipe);
 
       this.recipe.ingredients.forEach( (ingredient: Ingredient) => {
@@ -74,29 +74,18 @@ export class RecipeEditComponent implements OnInit {
     }
 
     this.recipeForm = new FormGroup({
-      name: new FormControl(recipeName, Validators.required),
-      imageUrl: new FormControl(imageUrl, Validators.required),
-      instructions: new FormControl(instructions, Validators.required),
+      name: new FormControl(name, Validators.required),
+      imagePath: new FormControl(imagePath, Validators.required),
+      description: new FormControl(description, Validators.required),
       ingredients: recipeIngredients,
     });
   }
 
 
   onFormSubmit() {
-    console.log('recipe form', this.recipeForm);
     this.isFormSubmitted = true;
+    console.log(this.recipeForm.value)
 
-    const newRecipe: Recipe = {
-      id         : Math.floor(Math.random() * 100),
-      name       : this.recipeForm.value['name'],
-      imagePath  : this.recipeForm.value['imageUrl'],
-      description: this.recipeForm.value['instructions'],
-      ingredients: [], // TODO
-      meal       : 'dinner' // TODO
-    }
-
-    alert('add new recipe' + newRecipe);
-    console.log('new recipe or save changes to the existing recipe');
 
     // this.recipeService.addNewRecipe(newRecipe)
   }
