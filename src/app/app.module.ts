@@ -1,25 +1,36 @@
-import { RecipeService } from './recipes/recipe.service';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 
+// Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { NotFound404Component } from './not-found-404/not-found-404.component';
+
+// Shared Components
+import { RecipeItemComponent } from './shared/components/recipe-item/recipe-item.component';
+import { DropdownDirective } from './shared/dropdown.directive';
+
+// Recipe Module
 import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeService } from './recipes/recipe.service';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+
+// Shopping List Module
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { AppRoutingModule } from './app-routing.module';
+
+//  Planner Module
 import { PlannerComponent } from './planner/planner.component';
 import { WeeklyComponent } from './planner/weekly/weekly.component';
 import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
-import { NotFound404Component } from './not-found-404/not-found-404.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +47,7 @@ import { NotFound404Component } from './not-found-404/not-found-404.component';
     PlannerComponent,
     WeeklyComponent,
     EmptyPlaceholderComponent,
-    NotFound404Component
+    NotFound404Component,
   ],
   imports: [
     BrowserModule,
