@@ -45,8 +45,8 @@ export class RecipeEditComponent implements OnInit {
   onAddIngredient() {
     // Add new Form Control to the Ingredients Array  of Form Controls
     (<FormArray> this.recipeForm.get('ingredients')).push( new FormGroup({
-      'ingredient-name': new FormControl(),
-      'ingredient-amount': new FormControl()
+      'name': new FormControl(),
+      'amount': new FormControl()
     }) )
   }
 
@@ -57,17 +57,16 @@ export class RecipeEditComponent implements OnInit {
     let recipeIngredients = new FormArray([])
 
     if (this.isEditMode) {
-      name   = this.recipe.name;
-      imagePath     = this.recipe.imagePath;
+      name        = this.recipe.name;
+      imagePath   = this.recipe.imagePath;
       description = this.recipe.description;
-      console.log('recipe ingredients', this.recipe);
 
       this.recipe.ingredients.forEach( (ingredient: Ingredient) => {
         console.log('recipe ingredients ', ingredient);
 
         recipeIngredients.push( new FormGroup({
-          'ingredient-name': new FormControl(ingredient.name, Validators.required),
-          'ingredient-amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*/)])
+          'name': new FormControl(ingredient.name, Validators.required),
+          'amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*/)])
         }))
       })
 
@@ -86,7 +85,7 @@ export class RecipeEditComponent implements OnInit {
     this.isFormSubmitted = true;
     console.log(this.recipeForm.value)
 
-
-    // this.recipeService.addNewRecipe(newRecipe)
+    const newRecipe = new Recipe(this.recipeForm.value)
+    this.recipeService.addNewRecipe(newRecipe);
   }
 }
