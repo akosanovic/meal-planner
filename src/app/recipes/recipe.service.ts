@@ -93,12 +93,10 @@ export class RecipeService {
 
   }
 
-  deleteRecipe(recipeToDelete: Recipe) {
-    this.recipes = this.recipes.filter( (recipe) => {
-      console.log(recipe.id !== recipe.id);
-
-      return recipe.id !== recipeToDelete.id;
+  deleteRecipe(id: Number) {
+    this.recipes = this.recipes.filter((recipe) => {
+      return recipe.id !== id;
     });
-    console.log('recipes ', this.recipes);
+    this.recipesUpdated.next(this.recipes);
   }
 }

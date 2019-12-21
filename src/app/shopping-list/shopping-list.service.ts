@@ -29,6 +29,7 @@ export class ShoppingListService {
     // }
 
     this.ingredients.unshift(...ingredients);
+    console.log('ingredients', ingredients);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 

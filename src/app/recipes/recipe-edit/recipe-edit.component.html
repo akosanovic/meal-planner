@@ -19,6 +19,12 @@
 		<ng-container class="ingredients-list" [formArrayName]="'ingredients'">
 			<h3 class="card-title">Ingredients: </h3>
 
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
+				</div>
+			</div>
+
 			<div class="row ingredient-item" *ngFor="let ingredient of recipeForm.get('ingredients')['controls']; let i = index" [formGroupName]="i">
 				<div class="col-sm-8">
 					<input type='text' class="form-control" [formControlName]='"name"' placeholder="Ingredient name">
@@ -30,13 +36,6 @@
 					<button type="button" class="btn btn-danger">X</button>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-sm-12">
-					<button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
-				</div>
-			</div>
-
 		</ng-container>
 
 
