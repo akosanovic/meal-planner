@@ -46,7 +46,6 @@ export class PlannerComponent implements OnInit, OnDestroy {
     }
 
     removeRecipe(meal: string, index: number) {
-        console.log('remove recipe ')
         this.plannerService.removeRecipe(meal, index);
     }
 

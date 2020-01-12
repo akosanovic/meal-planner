@@ -22,7 +22,7 @@
 
       <ng-container *ngIf='(dailyPlanner[key]).length > 0; else noRecipe'>
         <div class="list-card" *ngFor='let recipe of dailyPlanner[key], let i = index'>
-          <app-recipe-item [recipe]='recipe' (click)="removeRecipe(key, i)"></app-recipe-item>
+          <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(key, i)"></app-recipe-item>
         </div>
       </ng-container>
 
