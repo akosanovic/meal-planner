@@ -28,7 +28,6 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 //  Planner Module
 import { PlannerComponent } from './planner/planner.component';
-import { WeeklyComponent } from './planner/weekly/weekly.component';
 import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
 
 
@@ -45,7 +44,6 @@ import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-pla
     DropdownDirective,
     RecipeEditComponent,
     PlannerComponent,
-    WeeklyComponent,
     EmptyPlaceholderComponent,
     NotFound404Component,
   ],
