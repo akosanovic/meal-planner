@@ -17,6 +17,7 @@ export class RecipeEditComponent implements OnInit {
 
     recipe: Recipe;
     recipeForm: FormGroup;
+
     isEditMode: boolean;
     isFormSubmitted: boolean = false;
 
@@ -26,7 +27,6 @@ export class RecipeEditComponent implements OnInit {
 
     ngOnInit() {
         this.route.url.pipe(map(segments => {
-            console.log('segments', segments)
             return segments.join('/')
         })).subscribe(url => {
             this.isEditMode = url.includes('/edit'); // if '/edit' exists in the path
@@ -34,7 +34,6 @@ export class RecipeEditComponent implements OnInit {
 
         this.route.params.subscribe((params: Params) => {
             const recipeId = Number(params['id']);
-            console.log('param', recipeId)
             this.recipe = this.recipeService.getRecipeById(recipeId);
         });
 
@@ -50,7 +49,7 @@ export class RecipeEditComponent implements OnInit {
         let name = '';
         let imagePath = 'https://via.placeholder.com/1000x500';
         let description = '';
-        let recipeIngredients = new FormArray([])
+        const recipeIngredients = new FormArray([]);
 
         if (this.isEditMode) {
             name = this.recipe.name;
@@ -79,13 +78,14 @@ export class RecipeEditComponent implements OnInit {
 
     onFormSubmit() {
         this.isFormSubmitted = true;
-        const newRecipe = new Recipe(this.recipeForm.value);
+        const newRecipe = this.recipeForm.value;
         if (this.isEditMode) {
-            this.recipeService.updateRecipe()
+            const updatedRecipe = Object.assign({}, this.recipe, newRecipe);
+            this.recipeService.updateRecipe(updatedRecipe);
         } else {
             this.recipeService.addNewRecipe(newRecipe);
         }
-        this.onCancel();
+        // this.onCancel();
     }
 
     onAddIngredient() {

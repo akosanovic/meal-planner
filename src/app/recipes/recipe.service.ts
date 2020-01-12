@@ -71,26 +71,23 @@ export class RecipeService {
         });
     }
 
-    getDailyPlanner(): DailyPlanner {
-        const dailyPlanner = {
-            breakfast: [this.recipes[0]],
-            lunch: [],
-            dinner: []
-        };
-        return dailyPlanner;
-    }
-
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.slService.addIngredients(ingredients);
     }
 
     addNewRecipe(recipe: Recipe) {
-        this.recipes.unshift(recipe);
+        this.recipes.unshift( new Recipe(recipe));
         this.recipesUpdated.next(this.recipes);
     }
 
-    updateRecipe(recipe: Recipe) {
-
+    updateRecipe( updatedRecipe: Recipe) {
+        // TODO: Assign new recipes
+        this.recipes.forEach((recipe, i) => {
+            if (recipe.id === updatedRecipe.id) {
+                this.recipes[i] = <Recipe>updatedRecipe;
+            }
+        });
+        console.log('this.recipes', this.recipes);
     }
 
     deleteRecipe(id: Number) {

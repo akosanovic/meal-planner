@@ -1,7 +1,11 @@
 <!--  TODO: fix router link for planner  -->
-<a class="card"
+<!-- <a class="card"
   [routerLink]="[ '/recipe', id]"
-  [routerLinkActive]="'active'">
+  [routerLinkActive]="'active'"
+  > -->
+
+<a class="card">
+  <a class="remove-button">x</a>
 
   <img src="{{recipe.imagePath}}" class="card-img" alt="{{ recipe.name }}">
   <div class="card-img-overlay">
