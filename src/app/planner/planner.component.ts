@@ -1,68 +1,57 @@
+import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { EmptyPlaceholderComponent } from './empty-placeholder/empty-placeholder.component';
 import { DailyPlanner } from './../shared/models/daily-planner';
 import { Recipe } from './../recipes/recipe.model';
 import { RecipeService } from './../recipes/recipe.service';
-import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { PlannerService } from './planner.service';
 
 @Component({
-  selector: 'app-planner',
-  templateUrl: './planner.component.html',
-  styleUrls: ['./planner.component.css']
+    selector: 'app-planner',
+    templateUrl: './planner.component.html',
+    styleUrls: ['./planner.component.css']
 })
-export class PlannerComponent implements OnInit, AfterViewInit {
-  recipes: Recipe[]
-  dailyPlanner: DailyPlanner;
+export class PlannerComponent implements OnInit, OnDestroy {
+    date: number = Date.now();
+    subscription: Subscription;
+    recipes: Recipe[];
+    dailyPlanner: DailyPlanner;
 
-  dBreakfast: Recipe[];
-  dLunch: Recipe[];
-  dDinner: Recipe[];
+    dBreakfast: Recipe[];
+    dLunch: Recipe[];
+    dDinner: Recipe[];
 
-  @ViewChildren('placeholderRef', {read: ViewContainerRef}) placeholderRefs:  QueryList<ViewContainerRef>;
+    @ViewChildren('placeholderRef', { read: ViewContainerRef }) placeholderRefs: QueryList<ViewContainerRef>;
 
-  constructor( private recipeService: RecipeService,
-                private CFR: ComponentFactoryResolver ) { }
+    constructor(private recipeService: RecipeService,
+                private plannerService: PlannerService,
+                private CFR: ComponentFactoryResolver,
+    ) { }
 
-  ngOnInit() {
-    this.recipes = this.recipeService.getRecipes();
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 
-    this.dailyPlanner =  this.recipeService.getDailyPlanner();
+    ngOnInit() {
+        this.recipes = this.recipeService.getRecipes();
 
-    this.dBreakfast = this.dailyPlanner.breakfast;
-    this.dLunch = this.dailyPlanner.lunch;
-    this.dDinner = this.dailyPlanner.dinner;
+        this.subscription = this.plannerService.plannerChange.subscribe((planner: DailyPlanner) => {
+            this.dailyPlanner = planner;
+        });
+    }
 
-  }
-  ngAfterViewInit() {
-    this.injectDynamicComponent();
-  }
+    objectKeys(obj) {
+        return Object.keys(obj);
+    }
 
-  injectDynamicComponent() {
-    // Object that knows how to create a new component
-    const EmptyPlaceholderFactory =  this.CFR.resolveComponentFactory( EmptyPlaceholderComponent );
+    removeRecipe(meal: string, index: number) {
+        console.log('remove recipe ')
+        this.plannerService.removeRecipe(meal, index);
+    }
 
-
-    // All The places Component will be render
-    this.placeholderRefs.forEach(hostRef => {
-      console.log('view container ref', hostRef);
-
-      // Clear anything that might be stored there earlier
-      hostRef.clear();
-
-      // Create dynamic component in the reference place
-      const placeholderCompRef = hostRef.createComponent(EmptyPlaceholderFactory);
-
-      // Property binding
-      placeholderCompRef.instance.dropdownOptions = this.recipes;
-      placeholderCompRef.instance.meal = 'dinner';
-
-      // Event emitting
-      placeholderCompRef.instance.optionSelected.subscribe(
-        (dish) => {
-          // TODO: type of  meal (lunch, dinner);
-          // TODO: instead of pushing directly, update the state
-          this.dailyPlanner[dish.meal].push(dish.recipe);
-        }
-      )
-    })
-  }
+    addRecipe(recipe: Recipe, meal: string) {
+      console.log('recipe added', recipe );
+      this.plannerService.addRecipe(meal, recipe);
+    }
 }

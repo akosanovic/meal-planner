@@ -10,8 +10,7 @@ export class EmptyPlaceholderComponent implements OnInit {
   public isOpen = false;
 
   @Input() dropdownOptions: Recipe[] = [];
-  @Input() meal: 'breakfast' | 'lunch' | 'dinner' = 'breakfast';
-  @Output() optionSelected = new EventEmitter();
+  @Output() recipeSelected = new EventEmitter<Recipe>();
 
 
   constructor() { }
@@ -23,7 +22,7 @@ export class EmptyPlaceholderComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-  selectedOption(option) {
-    this.optionSelected.emit({meal: this.meal, recipe: option});
+  selectedOption(option: Recipe) {
+    this.recipeSelected.emit(option);
   }
 }

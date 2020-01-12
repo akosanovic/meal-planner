@@ -1,0 +1,31 @@
+.list {
+    background-color: #ebecf0;
+    border-radius: 3px;
+}
+
+.list-title {
+    font-size: 20px;
+    line-height: 24px;
+    color: #172b4d;
+}
+
+.list-card {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    cursor: pointer;
+    display: block;
+    margin-bottom: 8px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+    text-decoration: none;
+}
+
+.add-button {
+    display: block;
+}
+.add-button:hover {
+    background-color: rgba(9,30,66,.08);
+    color: #172b4d;
+}
