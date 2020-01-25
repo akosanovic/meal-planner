@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { EmptyPlaceholderComponent } from './empty-placeholder/empty-placeholder.component';
@@ -10,7 +10,7 @@ import { PlannerService } from './planner.service';
 @Component({
     selector: 'app-planner',
     templateUrl: './planner.component.html',
-    styleUrls: ['./planner.component.css']
+    styleUrls: ['./planner.component.scss']
 })
 export class PlannerComponent implements OnInit, OnDestroy {
     date: number = Date.now();

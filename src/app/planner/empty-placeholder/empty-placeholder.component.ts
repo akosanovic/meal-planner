@@ -4,7 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 @Component({
   selector: 'app-empty-placeholder',
   templateUrl: './empty-placeholder.component.html',
-  styleUrls: ['./empty-placeholder.component.css']
+  styleUrls: ['./empty-placeholder.component.scss']
 })
 export class EmptyPlaceholderComponent implements OnInit {
   public isOpen = false;

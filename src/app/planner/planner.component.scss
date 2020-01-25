@@ -1,12 +1,12 @@
 .list {
     background-color: #ebecf0;
     border-radius: 3px;
-}
-
-.list-title {
-    font-size: 20px;
-    line-height: 24px;
-    color: #172b4d;
+    // .list-title
+    &-title {
+        font-size: 20px;
+        line-height: 24px;
+        color: #172b4d;
+    }
 }
 
 .list-card {
@@ -24,8 +24,8 @@
 
 .add-button {
     display: block;
-}
-.add-button:hover {
-    background-color: rgba(9,30,66,.08);
-    color: #172b4d;
+    &:hover {
+        background-color: rgba(9,30,66,.08);
+        color: #172b4d;
+    }
 }

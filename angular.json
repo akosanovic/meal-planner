@@ -119,5 +119,10 @@
       }
     }
   },
-  "defaultProject": "chrono-planner"
+  "defaultProject": "chrono-planner",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

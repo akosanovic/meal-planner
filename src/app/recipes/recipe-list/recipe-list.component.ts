@@ -8,7 +8,7 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.css']
+  styleUrls: ['./recipe-list.component.scss']
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
