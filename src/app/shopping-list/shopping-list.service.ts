@@ -15,7 +15,7 @@ export class ShoppingListService {
   }
 
   getIngredientById(index: number): Ingredient {
-    return this.ingredients[index]
+    return this.ingredients[index];
   }
 
   addIngredient(ingredient: Ingredient) {
@@ -27,6 +27,7 @@ export class ShoppingListService {
     // for (let ingredient of ingredients) {
     //   this.addIngredient(ingredient);
     // }
+    console.log('add ingredients ', ingredients)
 
     this.ingredients.unshift(...ingredients);
     console.log('ingredients', ingredients);

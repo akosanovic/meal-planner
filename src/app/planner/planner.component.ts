@@ -45,6 +45,11 @@ export class PlannerComponent implements OnInit, OnDestroy {
         return Object.keys(obj);
     }
 
+    // Ingredients from planner to Shopping List
+    addToShoppingList() {
+      this.plannerService.addIngredientsToShoppingList();
+    }
+
     removeRecipe(meal: string, index: number) {
         this.plannerService.removeRecipe(meal, index);
     }

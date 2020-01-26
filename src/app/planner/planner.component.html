@@ -1,17 +1,11 @@
 <div class="container">
-  <div class="row">
+  <div class="row header">
     <div class="col-sm-6"> {{date | date}} </div>
     <div class="col-sm-6">
-      <div style="float: right;" class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Daily
+      <div style="float: right;">
+        <button class="btn btn-secondary" (click)="addToShoppingList()">
+          Add to shopping list
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Daily</a>
-          <a class="dropdown-item" href="#">Weekly</a>
-          <a class="dropdown-item" href="#">Monthly</a>
-        </div>
       </div>
     </div>
   </div>
@@ -27,11 +21,6 @@
         <app-empty-placeholder [dropdownOptions]='recipes' (recipeSelected)='addRecipe($event, meal)'>
         </app-empty-placeholder>
       </div>
-      <!--
-        <a class="add-button" (click)='toggleDropdownRecipeList()'>
-          + Add meal
-        </a>
-      -->
     </div>
 
 

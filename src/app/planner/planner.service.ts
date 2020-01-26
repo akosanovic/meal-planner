@@ -3,6 +3,8 @@ import { DailyPlanner } from '../shared/models/daily-planner';
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from './../recipes/recipe.model';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Ingredient } from '../shared/ingredient.model';
 
 
 @Injectable({
@@ -13,7 +15,8 @@ export class PlannerService {
   dailyPlanner: DailyPlanner = {} as DailyPlanner;
   recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService
+  constructor(private recipeService: RecipeService,
+              private slService: ShoppingListService
   ) {
 
     this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
@@ -29,7 +32,6 @@ export class PlannerService {
 
 
   getDailyPlanner() {
-    console.log(this.dailyPlanner);
     this.plannerChange.next(this.dailyPlanner);
   }
 
@@ -41,10 +43,27 @@ export class PlannerService {
 
   addRecipe(meal: string, recipe: Recipe) {
     this.dailyPlanner[meal].push(recipe);
-    console.log('add recipe ', recipe)
     this.plannerChange.next(this.dailyPlanner);
   }
 
+  // Pass all ingredients from current planner to Shopping List
+  addIngredientsToShoppingList() {
+    const ingredients: Ingredient[] = [];
+
+    //  TODO: make a flat list of daily planner
+    for (const meal of Object.keys(this.dailyPlanner)) {
+      if (this.dailyPlanner.hasOwnProperty(meal)) {
+        const recipes: Recipe[] = this.dailyPlanner[meal];
+
+        for (const recipe of recipes) {
+          console.log('ayoo', recipe);
+
+          ingredients.push(...recipe.ingredients);
+        }
+      }
+    }
+    this.slService.addIngredients( ingredients );
+  }
   /**
    * getPlanner( date, numOfDays ) {
    *    if (numOfDays == 1  && date == today() ) { return dailyPlanner for today }
