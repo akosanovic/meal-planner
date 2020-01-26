@@ -1,26 +1,61 @@
-.list {
+.meal-list {
     background-color: #ebecf0;
+    margin-bottom: 16px;
     border-radius: 3px;
+    padding: 8px;
+}
+
+.list {
+    display: flex;
+
     // .list-title
     &-title {
         font-size: 20px;
         line-height: 24px;
         color: #172b4d;
     }
+    .card-item {
+        max-width: 300px;
+        margin: 0 8px;
+    }
 }
 
-.list-card {
+
+.recipe-card {
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 0 1px 0 rgba(9,30,66,.25);
     cursor: pointer;
     display: block;
-    margin-bottom: 8px;
-    max-width: 300px;
     min-height: 20px;
     position: relative;
     text-decoration: none;
+
+ &::ng-deep {
+    .card-img {
+        display: block;
+        max-height: 150px;
+        width: auto;
+    }
+
+    .card-footer {
+        padding: 6px 8px;
+    }
+    .card-title {
+        margin-bottom: 0;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .card-text:last-child {
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+ }
 }
+
+
 
 .add-button {
     display: block;
