@@ -15,7 +15,7 @@ import { PlannerService } from './planner.service';
 export class PlannerComponent implements OnInit, OnDestroy {
     date: number = Date.now();
     subscription: Subscription;
-    recipes: Recipe[];
+    dropdownRecipeList: Recipe[];
     dailyPlanner: DailyPlanner;
 
     dBreakfast: Recipe[];
@@ -26,7 +26,7 @@ export class PlannerComponent implements OnInit, OnDestroy {
 
     constructor(private recipeService: RecipeService,
                 private plannerService: PlannerService,
-                private CFR: ComponentFactoryResolver,
+
     ) { }
 
     ngOnDestroy() {
@@ -34,7 +34,7 @@ export class PlannerComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.recipes = this.recipeService.getRecipes();
+        this.dropdownRecipeList = this.recipeService.getRecipes();
 
         this.subscription = this.plannerService.plannerChange.subscribe((planner: DailyPlanner) => {
             this.dailyPlanner = planner;
@@ -50,12 +50,11 @@ export class PlannerComponent implements OnInit, OnDestroy {
       this.plannerService.addIngredientsToShoppingList();
     }
 
-    removeRecipe(meal: string, index: number) {
-        this.plannerService.removeRecipe(meal, index);
+    removeRecipe(meal: string, recipe: Recipe) {
+        this.plannerService.removeRecipe(meal, recipe);
     }
 
     addRecipe(recipe: Recipe, meal: string) {
-      console.log('recipe added', recipe );
       this.plannerService.addRecipe(meal, recipe);
     }
 }

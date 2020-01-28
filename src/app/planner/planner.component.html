@@ -18,7 +18,7 @@
       <!-- Add Recipe -->
 
       <div class="card-item">
-        <app-empty-placeholder [dropdownOptions]='recipes' (recipeSelected)='addRecipe($event, meal)'>
+        <app-empty-placeholder [dropdownOptions]='dropdownRecipeList' (recipeSelected)='addRecipe($event, meal)'>
         </app-empty-placeholder>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <!-- Recipe Card -->
       <ng-container *ngIf='(dailyPlanner[meal]).length > 0;'>
         <div class="recipe-card card-item" *ngFor='let recipe of dailyPlanner[meal], let i = index'>
-          <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, i)"></app-recipe-item>
+          <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, recipe)"></app-recipe-item>
         </div>
       </ng-container>
     </div>

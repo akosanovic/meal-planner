@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { DailyPlanner } from '../shared/models/daily-planner';
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from './../recipes/recipe.model';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from '../shared/ingredient.model';
 
@@ -12,7 +12,7 @@ import { Ingredient } from '../shared/ingredient.model';
 })
 export class PlannerService {
   plannerChange = new BehaviorSubject<DailyPlanner>({} as DailyPlanner);
-  dailyPlanner: DailyPlanner = {} as DailyPlanner;
+  dailyPlanner: Observable<DailyPlanner> = this.plannerChange.asObservable();
   recipes: Recipe[];
 
   constructor(private recipeService: RecipeService,
@@ -21,29 +21,36 @@ export class PlannerService {
 
     this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
-      this.dailyPlanner = {
+
+      const initPlannerStore = {
         breakfast: [recipes[0], recipes[1]],
         lunch: [recipes[1]],
         dinner: [recipes[2]]
       };
-      this.plannerChange.next(this.dailyPlanner);
+
+      this.plannerChange.next(initPlannerStore);
     });
   }
 
 
-  getDailyPlanner() {
-    this.plannerChange.next(this.dailyPlanner);
+
+  removeRecipe(meal: string, deletedRecipe: Recipe) {
+    const currentValue: DailyPlanner = this.plannerChange.getValue();
+
+    return this.plannerChange.next(
+      Object.assign( {}, currentValue,
+        {[meal]: currentValue[meal].filter( (recipe: Recipe) => {
+          return recipe.id !== deletedRecipe.id;
+        })
+      })
+    );
   }
 
-  removeRecipe(meal: string, i: number) {
-    //  Not The best practice but it works
-    this.dailyPlanner[meal].splice(i, 1);
-    this.plannerChange.next(this.dailyPlanner);
-  }
 
   addRecipe(meal: string, recipe: Recipe) {
-    this.dailyPlanner[meal].push(recipe);
-    this.plannerChange.next(this.dailyPlanner);
+    const currentValue = this.plannerChange.getValue();
+    currentValue[meal].push(recipe);
+    this.plannerChange.next( currentValue );
   }
 
   // Pass all ingredients from current planner to Shopping List
