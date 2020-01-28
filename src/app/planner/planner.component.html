@@ -1,17 +1,11 @@
 <div class="container">
-  <div class="row">
+  <div class="row header">
     <div class="col-sm-6"> {{date | date}} </div>
     <div class="col-sm-6">
-      <div style="float: right;" class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Daily
+      <div style="float: right;">
+        <button class="btn btn-secondary" (click)="addToShoppingList()">
+          Add to shopping list
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Daily</a>
-          <a class="dropdown-item" href="#">Weekly</a>
-          <a class="dropdown-item" href="#">Monthly</a>
-        </div>
       </div>
     </div>
   </div>
@@ -24,14 +18,9 @@
       <!-- Add Recipe -->
 
       <div class="card-item">
-        <app-empty-placeholder [dropdownOptions]='recipes' (recipeSelected)='addRecipe($event, meal)'>
+        <app-empty-placeholder [dropdownOptions]='dropdownRecipeList' (recipeSelected)='addRecipe($event, meal)'>
         </app-empty-placeholder>
       </div>
-      <!--
-        <a class="add-button" (click)='toggleDropdownRecipeList()'>
-          + Add meal
-        </a>
-      -->
     </div>
 
 
@@ -39,7 +28,7 @@
       <!-- Recipe Card -->
       <ng-container *ngIf='(dailyPlanner[meal]).length > 0;'>
         <div class="recipe-card card-item" *ngFor='let recipe of dailyPlanner[meal], let i = index'>
-          <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, i)"></app-recipe-item>
+          <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, recipe)"></app-recipe-item>
         </div>
       </ng-container>
     </div>
