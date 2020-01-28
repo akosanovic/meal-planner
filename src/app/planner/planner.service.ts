@@ -16,7 +16,8 @@ export class PlannerService {
   recipes: Recipe[];
 
   constructor(private recipeService: RecipeService,
-              private slService: ShoppingListService
+              private slService: ShoppingListService,
+
   ) {
 
     this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
@@ -24,7 +25,7 @@ export class PlannerService {
 
       const initPlannerStore = {
         breakfast: [recipes[0], recipes[1]],
-        lunch: [recipes[1]],
+        lunch: [recipes[4]],
         dinner: [recipes[2]]
       };
 
@@ -47,33 +48,33 @@ export class PlannerService {
   }
 
 
-  addRecipe(meal: string, recipe: Recipe) {
+  addRecipe(meal: string, recipe: Recipe): void {
     const currentValue = this.plannerChange.getValue();
     currentValue[meal].push(recipe);
     this.plannerChange.next( currentValue );
   }
 
   // Pass all ingredients from current planner to Shopping List
-  addIngredientsToShoppingList() {
+  addIngredientsToShoppingList(): void {
     const ingredients: Ingredient[] = [];
 
-    //  TODO: make a flat list of daily planner
-    for (const meal of Object.keys(this.dailyPlanner)) {
-      if (this.dailyPlanner.hasOwnProperty(meal)) {
-        const recipes: Recipe[] = this.dailyPlanner[meal];
-
-        for (const recipe of recipes) {
-          console.log('ayoo', recipe);
-
-          ingredients.push(...recipe.ingredients);
-        }
-      }
+    for (const recipe of this._dailyPlannerFlatList()) {
+      ingredients.push(...recipe.ingredients);
     }
+
     this.slService.addIngredients( ingredients );
   }
-  /**
-   * getPlanner( date, numOfDays ) {
-   *    if (numOfDays == 1  && date == today() ) { return dailyPlanner for today }
-   * }
-   */
+
+  // Get current Planner flat list
+  _dailyPlannerFlatList(): Recipe[] {
+    const currentPlanner = this.plannerChange.getValue();
+    const flatList: Recipe[] = [];
+
+    for (const meal of Object.keys(currentPlanner)) {
+      if (currentPlanner.hasOwnProperty(meal)) {
+        flatList.push(...currentPlanner[meal]);
+      }
+    }
+    return flatList;
+  }
 }
