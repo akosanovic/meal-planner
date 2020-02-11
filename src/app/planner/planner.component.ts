@@ -5,7 +5,7 @@ import { EmptyPlaceholderComponent } from './empty-placeholder/empty-placeholder
 import { DailyPlanner } from './../shared/models/daily-planner';
 import { Recipe } from './../recipes/recipe.model';
 import { RecipeService } from './../recipes/recipe.service';
-import { PlannerService } from './planner.service';
+import { PlannerService } from './_services/planner.service';
 
 @Component({
     selector: 'app-planner',
@@ -48,6 +48,8 @@ export class PlannerComponent implements OnInit, OnDestroy {
     // Ingredients from planner to Shopping List
     addToShoppingList() {
       this.plannerService.addIngredientsToShoppingList();
+    }
+    saveChangesToDailyPlanner() {
     }
 
     removeRecipe(meal: string, recipe: Recipe) {

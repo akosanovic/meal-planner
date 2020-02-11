@@ -1,10 +1,12 @@
-import { Injectable, OnInit } from '@angular/core';
-import { DailyPlanner } from '../shared/models/daily-planner';
-import { RecipeService } from '../recipes/recipe.service';
-import { Recipe } from './../recipes/recipe.model';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Ingredient } from '../shared/ingredient.model';
+
+import { DailyPlanner } from '../../shared/models/daily-planner';
+import { Recipe } from '../../recipes/recipe.model';
+import { RecipeService } from '../../recipes/recipe.service';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { Ingredient } from '../../shared/ingredient.model';
+import { DataAPI } from '../../services/data-api.service';
 
 
 @Injectable({
@@ -17,8 +19,13 @@ export class PlannerService {
 
   constructor(private recipeService: RecipeService,
               private slService: ShoppingListService,
+              private api: DataAPI,
 
   ) {
+
+    this.api.getDailyPlanner().subscribe( resp => {
+      this.plannerChange.next(resp);
+    });
 
     this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
@@ -32,7 +39,6 @@ export class PlannerService {
       this.plannerChange.next(initPlannerStore);
     });
   }
-
 
 
   removeRecipe(meal: string, deletedRecipe: Recipe) {

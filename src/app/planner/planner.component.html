@@ -3,6 +3,8 @@
     <div class="col-sm-6"> {{date | date}} </div>
     <div class="col-sm-6">
       <div style="float: right;">
+        <button class="btn btn-light" (click)="saveChangesToDailyPlanner()">
+          Save Changes</button>
         <button class="btn btn-secondary" (click)="addToShoppingList()">
           Add to shopping list
         </button>
