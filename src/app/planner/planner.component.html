@@ -18,7 +18,7 @@
       <!-- Add Recipe -->
 
       <div class="card-item">
-        <app-empty-placeholder [dropdownOptions]='dropdownRecipeList' (recipeSelected)='addRecipe($event, meal)'>
+        <app-empty-placeholder [dropdownOptions]="dropdownRecipeList$ | async" (recipeSelected)='addRecipe($event, meal)'>
         </app-empty-placeholder>
       </div>
     </div>
