@@ -1,10 +1,11 @@
-import { Subject, BehaviorSubject } from 'rxjs';
-import { DailyPlanner } from './../shared/models/daily-planner';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { DataAPI } from '../services/data-api.service';
 
 @Injectable()
 export class RecipeService {
@@ -59,13 +60,27 @@ export class RecipeService {
 
     recipesUpdated: BehaviorSubject<Recipe[]> = new BehaviorSubject<Recipe[]>(this.recipes.slice());
 
-    constructor(private slService: ShoppingListService) { }
+    constructor(private slService: ShoppingListService,
+                private dataAPI: DataAPI,
 
-    getRecipes() {
-        return this.recipes.slice();
+                ) { }
+
+    getRecipes(): Observable<Recipe[]> {
+
+        return this.dataAPI.getRecipes().pipe( map((recipe) => {
+          const recipeList: Recipe[] = [];
+          for (const key in recipe) {
+            if (recipe.hasOwnProperty(key)) {
+              recipeList.push({...recipe[key], id: key});
+            }
+          }
+
+          this.recipes = recipeList;
+          return recipeList;
+        }));
     }
 
-    getRecipeById(id: number) {
+    getRecipeById(id: string) {
         return this.recipes.find((recipe) => {
             return recipe.id === id;
         });
@@ -78,6 +93,7 @@ export class RecipeService {
     addNewRecipe(recipe: Recipe) {
         this.recipes.unshift( new Recipe(recipe));
         this.recipesUpdated.next(this.recipes);
+        this.dataAPI.postRecipe(recipe);
     }
 
     updateRecipe( updatedRecipe: Recipe) {
@@ -90,7 +106,7 @@ export class RecipeService {
         console.log('this.recipes', this.recipes);
     }
 
-    deleteRecipe(id: Number) {
+    deleteRecipe(id: string) {
         this.recipes = this.recipes.filter((recipe) => {
             return recipe.id !== id;
         });

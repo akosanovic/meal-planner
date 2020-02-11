@@ -1,11 +1,11 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { EmptyPlaceholderComponent } from './empty-placeholder/empty-placeholder.component';
 import { DailyPlanner } from './../shared/models/daily-planner';
 import { Recipe } from './../recipes/recipe.model';
 import { RecipeService } from './../recipes/recipe.service';
-import { PlannerService } from './planner.service';
+import { PlannerService } from './_services/planner.service';
 
 @Component({
     selector: 'app-planner',
@@ -15,7 +15,7 @@ import { PlannerService } from './planner.service';
 export class PlannerComponent implements OnInit, OnDestroy {
     date: number = Date.now();
     subscription: Subscription;
-    dropdownRecipeList: Recipe[];
+    dropdownRecipeList$: Observable<Recipe[]>;
     dailyPlanner: DailyPlanner;
 
     dBreakfast: Recipe[];
@@ -34,7 +34,7 @@ export class PlannerComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.dropdownRecipeList = this.recipeService.getRecipes();
+        this.dropdownRecipeList$ = this.recipeService.getRecipes();
 
         this.subscription = this.plannerService.plannerChange.subscribe((planner: DailyPlanner) => {
             this.dailyPlanner = planner;
@@ -48,6 +48,8 @@ export class PlannerComponent implements OnInit, OnDestroy {
     // Ingredients from planner to Shopping List
     addToShoppingList() {
       this.plannerService.addIngredientsToShoppingList();
+    }
+    saveChangesToDailyPlanner() {
     }
 
     removeRecipe(meal: string, recipe: Recipe) {

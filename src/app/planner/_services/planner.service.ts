@@ -1,10 +1,12 @@
-import { Injectable, OnInit } from '@angular/core';
-import { DailyPlanner } from '../shared/models/daily-planner';
-import { RecipeService } from '../recipes/recipe.service';
-import { Recipe } from './../recipes/recipe.model';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Ingredient } from '../shared/ingredient.model';
+
+import { DailyPlanner } from '../../shared/models/daily-planner';
+import { Recipe } from '../../recipes/recipe.model';
+import { RecipeService } from '../../recipes/recipe.service';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { Ingredient } from '../../shared/ingredient.model';
+import { DataAPI } from '../../services/data-api.service';
 
 
 @Injectable({
@@ -16,22 +18,27 @@ export class PlannerService {
   recipes: Recipe[];
 
   constructor(private recipeService: RecipeService,
-              private slService: ShoppingListService
+              private slService: ShoppingListService,
+              private api: DataAPI,
+
   ) {
+
+    this.api.getDailyPlanner().subscribe( resp => {
+      this.plannerChange.next(resp);
+    });
 
     this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
 
       const initPlannerStore = {
         breakfast: [recipes[0], recipes[1]],
-        lunch: [recipes[1]],
+        lunch: [recipes[4]],
         dinner: [recipes[2]]
       };
 
       this.plannerChange.next(initPlannerStore);
     });
   }
-
 
 
   removeRecipe(meal: string, deletedRecipe: Recipe) {
@@ -47,33 +54,33 @@ export class PlannerService {
   }
 
 
-  addRecipe(meal: string, recipe: Recipe) {
+  addRecipe(meal: string, recipe: Recipe): void {
     const currentValue = this.plannerChange.getValue();
     currentValue[meal].push(recipe);
     this.plannerChange.next( currentValue );
   }
 
   // Pass all ingredients from current planner to Shopping List
-  addIngredientsToShoppingList() {
+  addIngredientsToShoppingList(): void {
     const ingredients: Ingredient[] = [];
 
-    //  TODO: make a flat list of daily planner
-    for (const meal of Object.keys(this.dailyPlanner)) {
-      if (this.dailyPlanner.hasOwnProperty(meal)) {
-        const recipes: Recipe[] = this.dailyPlanner[meal];
-
-        for (const recipe of recipes) {
-          console.log('ayoo', recipe);
-
-          ingredients.push(...recipe.ingredients);
-        }
-      }
+    for (const recipe of this._dailyPlannerFlatList()) {
+      ingredients.push(...recipe.ingredients);
     }
+
     this.slService.addIngredients( ingredients );
   }
-  /**
-   * getPlanner( date, numOfDays ) {
-   *    if (numOfDays == 1  && date == today() ) { return dailyPlanner for today }
-   * }
-   */
+
+  // Get current Planner flat list
+  _dailyPlannerFlatList(): Recipe[] {
+    const currentPlanner = this.plannerChange.getValue();
+    const flatList: Recipe[] = [];
+
+    for (const meal of Object.keys(currentPlanner)) {
+      if (currentPlanner.hasOwnProperty(meal)) {
+        flatList.push(...currentPlanner[meal]);
+      }
+    }
+    return flatList;
+  }
 }

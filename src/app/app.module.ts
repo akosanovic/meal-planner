@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 
+// Services
+import { DataAPI } from './services/data-api.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -52,8 +56,10 @@ import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-pla
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [
+    DataAPI,
     ShoppingListService,
     RecipeService
   ],

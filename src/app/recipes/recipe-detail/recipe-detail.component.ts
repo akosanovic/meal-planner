@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
-  id: number = null;
+  id: string = null;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
@@ -20,9 +20,9 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe( (params: Params) => {
-      this.id = Number(params['id']);
+      this.id = params['id'];
       this.recipe = this.recipeService.getRecipeById(this.id);
-    })
+    });
   }
 
   deleteRecipe(recipe: Recipe) {

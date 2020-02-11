@@ -33,7 +33,7 @@ export class RecipeEditComponent implements OnInit {
         });
 
         this.route.params.subscribe((params: Params) => {
-            const recipeId = Number(params['id']);
+            const recipeId = params['id'];
             this.recipe = this.recipeService.getRecipeById(recipeId);
         });
 

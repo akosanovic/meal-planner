@@ -11,7 +11,7 @@ export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
   @Output() removeRecipe = new EventEmitter();
 
-  id: number = 0;
+  id: string = null;
 
   constructor() { }
 

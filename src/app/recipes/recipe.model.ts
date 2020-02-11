@@ -1,7 +1,7 @@
 import { Ingredient } from '../shared/ingredient.model';
 
 export class Recipe {
-  public id: number;
+  public id: string;
   public name: string;
   public description: string;
   public imagePath: string;
@@ -9,7 +9,7 @@ export class Recipe {
   public meal: String[] | string;
 
   constructor(recipe) {
-    this.id = Math.floor(Math.random() * 10000);
+    this.id = recipe.id;
     this.name = recipe.name;
     this.description = recipe.description;
     this.imagePath = recipe.imagePath;
