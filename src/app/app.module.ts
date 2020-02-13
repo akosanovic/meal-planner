@@ -33,6 +33,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 //  Planner Module
 import { PlannerComponent } from './planner/planner.component';
 import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-pla
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     DataAPI,
