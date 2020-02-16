@@ -1,7 +1,6 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 
-import { EmptyPlaceholderComponent } from './empty-placeholder/empty-placeholder.component';
 import { DailyPlanner } from './../shared/models/daily-planner';
 import { Recipe } from './../recipes/recipe.model';
 import { RecipeService } from './../recipes/recipe.service';

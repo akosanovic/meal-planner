@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './modules/material/material.module';
+
 
 // Services
 import { DataAPI } from './services/data-api.service';
@@ -33,6 +35,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 //  Planner Module
 import { PlannerComponent } from './planner/planner.component';
 import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -57,6 +60,8 @@ import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-pla
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     DataAPI,

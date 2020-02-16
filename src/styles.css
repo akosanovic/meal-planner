@@ -1,4 +1,44 @@
+/* proxima-nova */
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 300;
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Thin.otf') format('truetype');
+}
+@font-face {
+    font-weight: 400;
+    font-family: 'Proxima Nova';
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Regular.otf') format('truetype');
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 500;
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Bold.otf') format('truetype');
+}
+@font-face {
+    font-weight: 600;
+    font-family: 'Proxima Nova';
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Extrabold.otf') format('truetype');
+}
+@font-face {
+    font-weight: 700;
+    font-family: 'Proxima Nova';
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Black.otf') format('truetype');
+}
+
+
 /* You can add global styles to this file, and also import other style files */
 .link {
 	cursor: pointer;
+}
+* {
+    box-sizing: border-box;
+
+}
+html, body {
+    height: 100%;
+ }
+body {
+    margin: 0;
+    font-weight: 400;
+    font-family: "Proxima Nova", "Source Sans Pro", "Helvetica Neue", sans-serif;
 }
