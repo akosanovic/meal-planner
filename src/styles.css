@@ -4,16 +4,25 @@
     font-weight: 300;
     src: url('/assets/fonts/proxima-nova/ProximaNova-Thin.otf') format('truetype');
 }
-
-@font-face {
-    font-family: 'Proxima Nova';
-    font-weight: bold;
-    src: url('/assets/fonts/proxima-nova/ProximaNova-Bold.otf') format('truetype');
-}
 @font-face {
     font-weight: 400;
     font-family: 'Proxima Nova';
     src: url('/assets/fonts/proxima-nova/ProximaNova-Regular.otf') format('truetype');
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 500;
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Bold.otf') format('truetype');
+}
+@font-face {
+    font-weight: 600;
+    font-family: 'Proxima Nova';
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Extrabold.otf') format('truetype');
+}
+@font-face {
+    font-weight: 700;
+    font-family: 'Proxima Nova';
+    src: url('/assets/fonts/proxima-nova/ProximaNova-Black.otf') format('truetype');
 }
 
 
@@ -26,6 +35,6 @@ html, body {
  }
 body {
     margin: 0;
-    font-weight: normal;
+    font-weight: 400;
     font-family: "Proxima Nova", "Source Sans Pro", "Helvetica Neue", sans-serif;
 }

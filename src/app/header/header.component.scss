@@ -1,0 +1,60 @@
+@import 'color-variables';
+
+.navbar {
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #222534), color-stop(100%, #0c0d13));
+    background-image: -moz-linear-gradient(bottom, #222534 0%, #0c0d13 100%);
+    background-image: -webkit-linear-gradient(bottom, #222534 0%, #0c0d13 100%);
+    background-image: linear-gradient(to top, #222534 0%, #0c0d13 100%);
+    a {
+        text-decoration: none;
+        outline: 0;
+        background: transparent;
+    }
+    ul {
+        padding-inline-start: 0;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        list-style: none;
+    }
+
+
+    .link {
+        transition: all 0.5s linear;
+        color: $gold;
+        &:hover {
+            color: $gold-hover;
+        }
+    }
+}
+
+.navbar-logo {
+    display: inline-block;
+    padding: 1rem 0.5rem 1.5rem;
+
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.navbar-toggler {
+    display: none;
+    @media screen and (max-width: 640px) {
+        display: inline-block;
+    }
+}
+
+.navbar-nav {
+    display: inline-block;
+    @media screen and (max-width: 640px) {
+        display: none;
+    }
+}
+
+.nav-item {
+    display: inline-block;
+    padding-left: 4.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-align: left;
+}

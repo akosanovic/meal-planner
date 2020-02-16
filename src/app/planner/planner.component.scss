@@ -1,14 +1,16 @@
+.container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+}
+
 .header {
     padding: 12px 0;
     align-items: center;
 }
 
-.meal-list {
-    background-color: #ebecf0;
-    margin-bottom: 16px;
-    border-radius: 3px;
-    padding: 8px;
-}
+
 
 .list {
     display: flex;
