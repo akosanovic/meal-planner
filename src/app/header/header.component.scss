@@ -1,23 +1,25 @@
 @import 'color-variables';
 
+// Override default style
+a {
+    text-decoration: none;
+    outline: 0;
+    background: transparent;
+    display: inline-block;
+}
+ul {
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    list-style: none;
+}
+
 .navbar {
     background-size: 100%;
     background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #222534), color-stop(100%, #0c0d13));
     background-image: -moz-linear-gradient(bottom, #222534 0%, #0c0d13 100%);
     background-image: -webkit-linear-gradient(bottom, #222534 0%, #0c0d13 100%);
     background-image: linear-gradient(to top, #222534 0%, #0c0d13 100%);
-    a {
-        text-decoration: none;
-        outline: 0;
-        background: transparent;
-    }
-    ul {
-        padding-inline-start: 0;
-        margin-block-start: 0;
-        margin-block-end: 0;
-        list-style: none;
-    }
-
 
     .link {
         transition: all 0.5s linear;
@@ -28,33 +30,56 @@
     }
 }
 
+.navbar-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    max-width: 1280px;
+    margin: 0 auto;
+   @media screen and (max-width: 640px) {
+        justify-content: space-between;
+        padding: 0 1rem;
+   }
+}
+
 .navbar-logo {
     display: inline-block;
-    padding: 1rem 0.5rem 1.5rem;
+    padding: 1rem 0;
 
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 400;
     letter-spacing: 1px;
+
+    @media screen and (max-width: 640px) {
+        font-size: 1.5rem;
+        padding: 0.75rem 0;
+    }
 }
 
 .navbar-toggler {
-    display: none;
+    display: none; // hide burger menu on desktop
+    height: 1rem;
+    width: 1.5rem;
+    overflow: hidden;
     @media screen and (max-width: 640px) {
-        display: inline-block;
+        display: block;
+
+    }
+    img {
+        width: 100%;
+        height: 100%;
     }
 }
 
 .navbar-nav {
     display: inline-block;
     @media screen and (max-width: 640px) {
-        display: none;
+        display: none; // hide desktop nav on mobile
     }
 }
 
 .nav-item {
     display: inline-block;
     padding-left: 4.5rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    text-align: left;
 }
