@@ -17,12 +17,6 @@
   <div class="row meal-list" *ngFor="let meal of objectKeys(dailyPlanner)">
     <div class="col-md-3 col-sm-3">
       <h3 class="list-title" > {{meal | titlecase}} </h3>
-      <!-- Add Recipe -->
-
-      <div class="card-item">
-        <app-empty-placeholder [dropdownOptions]="dropdownRecipeList$ | async" (recipeSelected)='addRecipe($event, meal)'>
-        </app-empty-placeholder>
-      </div>
     </div>
 
 
@@ -33,6 +27,11 @@
           <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, recipe)"></app-recipe-item>
         </div>
       </ng-container>
+
+      <div class="card-item">  <!-- Add Recipe -->
+        <app-empty-placeholder [dropdownOptions]="dropdownRecipeList$ | async" (recipeSelected)='addRecipe($event, meal)'>
+        </app-empty-placeholder>
+      </div>
     </div>
 
   </div>

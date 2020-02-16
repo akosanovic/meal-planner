@@ -1,18 +1,6 @@
 @import 'color-variables';
 
-// Override default style
-a {
-    text-decoration: none;
-    outline: 0;
-    background: transparent;
-    display: inline-block;
-}
-ul {
-    padding-inline-start: 0;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    list-style: none;
-}
+
 
 .navbar {
     background-size: 100%;

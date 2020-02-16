@@ -1,3 +1,5 @@
+@import 'font-variables';
+
 .list-group-item {
 	cursor: pointer;
 }
@@ -24,4 +26,22 @@
     opacity: 1;
     visibility: visible;
     background-color: #ebecf0;
+}
+
+.card-footer {
+    text-align: center;
+    .card-title {
+        margin-bottom: 0;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+    }
+
+    .card-text:last-child {
+        color: #777777;
+        font-family: $proxima-nova;
+        line-height: 1rem;
+        font-weight: 400;
+        font-size: 14px;
+    }
 }
