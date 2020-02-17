@@ -13,7 +13,7 @@ import { DataAPI } from '../../services/data-api.service';
   providedIn: 'root'
 })
 export class PlannerService {
-  plannerChange = new BehaviorSubject<DailyPlanner>({} as DailyPlanner);
+  plannerChange = new BehaviorSubject<DailyPlanner>(null);
   dailyPlanner: Observable<DailyPlanner> = this.plannerChange.asObservable();
   recipes: Recipe[];
 
@@ -23,9 +23,9 @@ export class PlannerService {
 
   ) {
 
-    this.api.getDailyPlanner().subscribe( resp => {
-      this.plannerChange.next(resp);
-    });
+    // this.api.getDailyPlanner().subscribe( resp => {
+    //   this.plannerChange.next(resp);
+    // });
 
     this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;

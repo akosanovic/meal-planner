@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewContainerRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { DailyPlanner } from './../shared/models/daily-planner';
 import { Recipe } from './../recipes/recipe.model';
@@ -15,11 +16,14 @@ export class PlannerComponent implements OnInit, OnDestroy {
     date: number = Date.now();
     subscription: Subscription;
     dropdownRecipeList$: Observable<Recipe[]>;
-    dailyPlanner: DailyPlanner;
+    dailyPlanner: DailyPlanner = null;
 
-    dBreakfast: Recipe[];
-    dLunch: Recipe[];
-    dDinner: Recipe[];
+    selectedLayout = 0;
+    plannerLayoutList = [
+      {name: 'Daily'},
+      {name: 'Weekly'},
+      {name: 'Monthly'}
+    ];
 
     @ViewChildren('placeholderRef', { read: ViewContainerRef }) placeholderRefs: QueryList<ViewContainerRef>;
 
