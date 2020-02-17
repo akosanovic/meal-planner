@@ -1,16 +1,15 @@
-<div class="card bg-light empty-placeholder">
-	<div class="card-body">
-		<div class="dropdown" appDropdown>
+<div class="card empty-placeholder" (click)='toggleDropdown()' >
+  <div class="card-img-overlay"></div>
+  <mat-icon class="add-icon"> add_circle_outline</mat-icon>
 
-			<input type="text" placeholder="+ Add Meal"
-					class="card-title text-muted dropdown-toggle" id="dropdownMenuButton"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item" *ngFor='let option of dropdownOptions' (click)='selectedOption(option)'>
-					{{option.name}}
-				</a>
-			</div>
-		</div>
-	</div>
+  <div class="card-footer">
+      <!-- Select -->
+  <mat-form-field>
+    <mat-select #addRecipe (selectionChange)="selectedOption($event)">
+      <mat-option *ngFor="let option of dropdownOptions; let i = index" [value]="i">
+        {{option.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
 </div>

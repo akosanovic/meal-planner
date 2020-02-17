@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -13,13 +14,14 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-
+    MatIconModule,
   ],
   exports: [
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatIconModule
   ]
 })
 export class MaterialModule { }

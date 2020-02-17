@@ -1,3 +1,18 @@
-.dropdown-item {
-	cursor: pointer;
+@import 'base.scss';
+
+.card {
+    cursor: pointer;
+}
+
+.add-icon {
+    display: block;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 10rem;
+    color: $grey;
+    opacity: 0.6;
+    &:hover {
+        color: $gold-hover;
+    }
 }
