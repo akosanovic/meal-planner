@@ -62,22 +62,11 @@ export class RecipeService {
 
     constructor(private slService: ShoppingListService,
                 private dataAPI: DataAPI,
-
                 ) { }
 
     getRecipes(): Observable<Recipe[]> {
+        return this.dataAPI.getRecipes();
 
-        return this.dataAPI.getRecipes().pipe( map((recipe) => {
-          const recipeList: Recipe[] = [];
-          for (const key in recipe) {
-            if (recipe.hasOwnProperty(key)) {
-              recipeList.push({...recipe[key], id: key});
-            }
-          }
-
-          this.recipes = recipeList;
-          return recipeList;
-        }));
     }
 
     getRecipeById(id: string) {

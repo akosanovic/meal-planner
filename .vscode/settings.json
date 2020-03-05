@@ -1,4 +1,5 @@
 {
 	"html-css-class-completion.enableEmmetSupport": true,
-	"editor.detectIndentation": false,
+    "editor.detectIndentation": true,
+    "explorer.compactFolders": false,
 }

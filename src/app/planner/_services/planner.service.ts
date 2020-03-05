@@ -31,13 +31,18 @@ export class PlannerService {
       this.recipes = recipes;
 
       const initPlannerStore = {
-        breakfast: [recipes[0], recipes[1]],
+        breakfast: [recipes[0]],
         lunch: [recipes[4]],
         dinner: [recipes[2]]
       };
 
       this.plannerChange.next(initPlannerStore);
     });
+  }
+
+  savePlanner() {
+    const currentPlanner = this.plannerChange.getValue();
+    this.api.saveDailyPlanner(currentPlanner);
   }
 
 

@@ -9,7 +9,7 @@ export class Recipe {
   public meal: String[] | string;
 
   constructor(recipe) {
-    this.id = recipe.id;
+    this.id = recipe.id ? recipe.id : Math.floor(Math.random() * 1000);
     this.name = recipe.name;
     this.description = recipe.description;
     this.imagePath = recipe.imagePath;
