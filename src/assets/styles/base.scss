@@ -1,0 +1,16 @@
+@import 'color-variables';
+@import 'font-variables';
+
+.btn {
+    padding: 0.75rem;
+    border: 1px solid #727272;
+    cursor: pointer;
+
+    color: $grey;
+    background: transparent;
+    font-family: $proxima-nova;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}

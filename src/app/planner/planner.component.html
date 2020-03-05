@@ -1,39 +1,53 @@
 <div class="container">
   <div class="row header">
-    <div class="col-sm-6"> {{date | date}} </div>
     <div class="col-sm-6">
-      <div style="float: right;">
-        <button class="btn btn-light" (click)="saveChangesToDailyPlanner()">
-          Save Changes</button>
-        <button class="btn btn-secondary" (click)="addToShoppingList()">
-          Add to shopping list
-        </button>
+
+      <mat-form-field>
+        <mat-select [value]="selectedLayout">
+          <mat-option *ngFor="let layout of plannerLayoutList; let i = index" [value]="i">
+            {{layout.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="buttons-group">
+      <div>
+        <button class="btn" (click)="saveChangesToDailyPlanner()"> Save Changes</button>
+        <button class="btn" (click)="addToShoppingList()"> Add to shopping list </button>
       </div>
     </div>
   </div>
 
 
-
-  <div class="row meal-list" *ngFor="let meal of objectKeys(dailyPlanner)">
-    <div class="col-md-3 col-sm-3">
-      <h3 class="list-title" > {{meal | titlecase}} </h3>
-      <!-- Add Recipe -->
-
-      <div class="card-item">
-        <app-empty-placeholder [dropdownOptions]="dropdownRecipeList$ | async" (recipeSelected)='addRecipe($event, meal)'>
-        </app-empty-placeholder>
+  <!-- List -->
+  <ng-container  *ngIf="dailyPlanner; else emptyPlanner">
+    <div class="row meal-list" *ngFor="let meal of objectKeys(dailyPlanner)">
+      <div class="col-md-3 col-sm-3">
+        <h3 class="list-title"> {{meal | titlecase}} </h3>
       </div>
-    </div>
 
 
-    <div class="col-md-9 col-sm-9 list">
-      <!-- Recipe Card -->
-      <ng-container *ngIf='(dailyPlanner[meal]).length > 0;'>
-        <div class="recipe-card card-item" *ngFor='let recipe of dailyPlanner[meal], let i = index'>
-          <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, recipe)"></app-recipe-item>
+      <div class="col-md-9 col-sm-9 list">
+        <!-- Recipe Card -->
+        <ng-container *ngIf='(dailyPlanner[meal]).length > 0;'>
+          <div class="recipe-card card-item" *ngFor='let recipe of dailyPlanner[meal], let i = index'>
+            <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, recipe)"></app-recipe-item>
+          </div>
+        </ng-container>
+
+
+        <div class="card-item">
+          <!-- Add Recipe -->
+          <app-empty-placeholder [dropdownOptions]="dropdownRecipeList$ | async" (recipeSelected)='addRecipe($event, meal)'>
+          </app-empty-placeholder>
         </div>
-      </ng-container>
-    </div>
+      </div>
 
-  </div>
+    </div>
+  </ng-container>
+
+  <ng-template #emptyPlanner>
+    Empty Planner
+  </ng-template>
 </div>
