@@ -35,10 +35,9 @@ export class PlannerComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-
-        this.api.getDailyPlanner().subscribe( planner => {
-          this.dailyPlanner =  planner;
-        } );
+      this.api.getDailyPlanner().subscribe( (planner: DailyPlanner) => {
+        this.dailyPlanner = planner;
+      });
 
         this.dropdownRecipeList$ = this.recipeService.getRecipes();
 

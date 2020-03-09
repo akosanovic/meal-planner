@@ -35,6 +35,8 @@ export class DataAPI {
   }
 
   getDailyPlanner(): Observable<DailyPlanner> {
-    return this.db.object<DailyPlanner>(`planner/${this.todayKey}`).valueChanges();
+    return this.db.object<DailyPlanner>(`planner/${this.todayKey}`).valueChanges().pipe(map((payload: DailyPlanner | null) => {
+      return payload ? payload : new DailyPlanner();
+    }));
   }
 }
