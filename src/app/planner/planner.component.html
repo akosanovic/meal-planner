@@ -30,7 +30,7 @@
 
       <div class="col-md-9 col-sm-9 list">
         <!-- Recipe Card -->
-        <ng-container *ngIf='(dailyPlanner[meal]).length > 0;'>
+        <ng-container *ngIf='(dailyPlanner[meal]).length > 0'>
           <div class="recipe-card card-item" *ngFor='let recipe of dailyPlanner[meal], let i = index'>
             <app-recipe-item [recipe]='recipe' (removeRecipe)="removeRecipe(meal, recipe)"></app-recipe-item>
           </div>
