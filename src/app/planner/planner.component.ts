@@ -28,14 +28,15 @@ export class PlannerComponent implements OnInit, OnDestroy {
 
     @ViewChildren('placeholderRef', { read: ViewContainerRef }) placeholderRefs: QueryList<ViewContainerRef>;
 
-	constructor(private recipeService: RecipeService,
-				private plannerService: PlannerService,
-				private api: DataAPI,
-    ) { }
+  constructor(private recipeService: RecipeService,
+    private plannerService: PlannerService,
+    private api: DataAPI,
+  ) { }
 
 
     ngOnInit() {
       this.api.getDailyPlanner().subscribe( (planner: DailyPlanner) => {
+        console.log('on init', planner);
         this.dailyPlanner = planner;
       });
 

@@ -21,7 +21,7 @@
 
 
   <!-- List -->
-  <ng-container  *ngIf="dailyPlanner; else emptyPlanner">
+  <ng-container  *ngIf="dailyPlanner">
     <div class="row meal-list" *ngFor="let meal of objectKeys(dailyPlanner)">
       <div class="col-md-3 col-sm-3">
         <h3 class="list-title"> {{meal | titlecase}} </h3>
@@ -46,8 +46,4 @@
 
     </div>
   </ng-container>
-
-  <ng-template #emptyPlanner>
-    Empty Planner
-  </ng-template>
 </div>

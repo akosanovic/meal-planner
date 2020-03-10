@@ -1,14 +1,15 @@
-import { Recipe } from './../../recipes/recipe.model';
+import { Recipe } from '../../recipes/recipe.model';
 
 export class DailyPlanner {
-  public id?: string;
-  public breakfast: Recipe[];
-  public lunch: Recipe[];
-  public dinner: Recipe[];
+  id?: string;
+  breakfast: Recipe[] = [];
+  lunch: Recipe[] = [];
+  dinner: Recipe[] = [];
 
   constructor(obj?: DailyPlanner) {
-    this.breakfast = obj ? obj.breakfast : [];
-    this.lunch = obj ? obj.lunch : [];
-    this.dinner = obj ? obj.dinner : [];
+    if (!obj) { return; }
+    this.breakfast = obj.breakfast ? obj.breakfast : this.breakfast;
+    this.lunch     = obj.lunch ? obj.lunch : this.lunch;
+    this.dinner    = obj.dinner ? obj.dinner : this.dinner;
   }
 }
