@@ -23,21 +23,16 @@ export class PlannerService {
 
   ) {
 
-    // this.api.getDailyPlanner().subscribe( resp => {
-    //   this.plannerChange.next(resp);
-    // });
-
-    this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
-      this.recipes = recipes;
-
-      const initPlannerStore = {
-        breakfast: [recipes[0]],
-        lunch: [recipes[4]],
-        dinner: [recipes[2]]
-      };
-
-      this.plannerChange.next(initPlannerStore);
+    this.api.getDailyPlanner().subscribe( (planner: DailyPlanner) => {
+      console.log('on init', planner);
+      this.plannerChange.next(planner);
     });
+
+    // this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
+    //   this.recipes = recipes;
+
+    //   this.plannerChange.next(initPlannerStore);
+    // });
   }
 
   savePlanner() {
