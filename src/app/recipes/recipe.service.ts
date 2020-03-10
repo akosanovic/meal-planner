@@ -66,7 +66,6 @@ export class RecipeService {
 
     getRecipes(): Observable<Recipe[]> {
         return this.dataAPI.getRecipes();
-
     }
 
     getRecipeById(id: string) {

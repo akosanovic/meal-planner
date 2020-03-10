@@ -22,17 +22,11 @@ export class PlannerService {
               private api: DataAPI,
 
   ) {
-
     this.api.getDailyPlanner().subscribe( (planner: DailyPlanner) => {
       console.log('on init', planner);
       this.plannerChange.next(planner);
     });
 
-    // this.recipeService.recipesUpdated.subscribe((recipes: Recipe[]) => {
-    //   this.recipes = recipes;
-
-    //   this.plannerChange.next(initPlannerStore);
-    // });
   }
 
   savePlanner() {
@@ -43,20 +37,22 @@ export class PlannerService {
 
   removeRecipe(meal: string, deletedRecipe: Recipe) {
     const currentValue: DailyPlanner = this.plannerChange.getValue();
+    console.log('current value ', currentValue);
 
-    return this.plannerChange.next(
-      Object.assign( {}, currentValue,
-        {[meal]: currentValue[meal].filter( (recipe: Recipe) => {
-          return recipe.id !== deletedRecipe.id;
-        })
+    const updatedRecipeList = Object.assign( {}, currentValue,
+      {[meal]: currentValue[meal].filter( (recipe: Recipe) => {
+        return recipe.id !== deletedRecipe.id;
       })
-    );
+    });
+
+    return this.plannerChange.next(updatedRecipeList);
   }
 
 
   addRecipe(meal: string, recipe: Recipe): void {
     const currentValue = this.plannerChange.getValue();
     currentValue[meal].push(recipe);
+
     this.plannerChange.next( currentValue );
   }
 

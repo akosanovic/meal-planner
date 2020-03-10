@@ -17,13 +17,12 @@ export class DataAPI {
     String(this.currentDate.getMonth() + 1) + // Month: jan == 0
     String(this.currentDate.getFullYear()); // FullYear: 2020
 
-
-
   constructor(private http: HttpClient,
     private db: AngularFireDatabase) {}
 
   getRecipes(): Observable<Recipe[]> {
-    return this.db.list<Recipe>('recipes').valueChanges();
+    return this.db.list<Recipe>('recipes').valueChanges()
+    // .pipe(tap(rec => console.log('get recipes ', rec)));
   }
 
   postRecipe(recipe: Recipe): void {
@@ -34,9 +33,12 @@ export class DataAPI {
     this.db.list('planner').set(date, dailyPlanner);
   }
 
+  addRecipeToPlanner(recipe: Recipe, meal: 'breakfast' | 'lunch' | 'dinner', date = this.todayKey) {
+    this.db.list(`planner/${date}/${meal}`).push(recipe);
+  }
+
   getDailyPlanner(): Observable<DailyPlanner> {
-    return this.db.object<DailyPlanner>(`planner/${this.todayKey}`).valueChanges().pipe(map((payload: DailyPlanner | null) => {
-      console.log('getDailyPlanner', payload);
+    return this.db.object(`planner/${this.todayKey}`).valueChanges().pipe(map((payload) => {
       return new DailyPlanner(payload);
     }));
   }

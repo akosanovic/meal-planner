@@ -60,8 +60,10 @@ export class PlannerComponent implements OnInit, OnDestroy {
     this.plannerService.removeRecipe(meal, recipe);
   }
 
-  addRecipe(recipe: Recipe, meal: string) {
+  // TODO: types as tuples
+  addRecipe(recipe: Recipe, meal: 'breakfast'|'lunch'|'dinner') {
     this.plannerService.addRecipe(meal, recipe);
+    this.api.addRecipeToPlanner(recipe, meal);
   }
 
   ngOnDestroy() {
