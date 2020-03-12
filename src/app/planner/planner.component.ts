@@ -7,6 +7,7 @@ import { Recipe } from './../recipes/recipe.model';
 import { RecipeService } from './../recipes/recipe.service';
 import { PlannerService } from './_services/planner.service';
 import { DataAPI } from '../services/data-api.service';
+import { MealTypes } from './_models/meal.types';
 
 @Component({
   selector: 'app-planner',
@@ -56,12 +57,13 @@ export class PlannerComponent implements OnInit, OnDestroy {
     this.plannerService.savePlanner();
   }
 
-  removeRecipe(meal: string, recipe: Recipe) {
-    this.plannerService.removeRecipe(meal, recipe);
+  removeRecipe( recipe: Recipe, meal: MealTypes) {
+    this.api.removeRecipeFromPlanner(recipe, meal).then(resp => {
+      console.log('remove recipe resp', resp);
+    });
   }
 
-  // TODO: types as tuples
-  addRecipe(recipe: Recipe, meal: 'breakfast'|'lunch'|'dinner') {
+  addRecipe(recipe: Recipe, meal: MealTypes) {
     this.plannerService.addRecipe(meal, recipe);
     this.api.addRecipeToPlanner(recipe, meal);
   }

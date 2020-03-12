@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { Recipe } from './../recipes/recipe.model';
 import { DailyPlanner } from '../shared/models/daily-planner';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { MealTypes } from '../planner/_models/meal.types';
 
 
 
@@ -33,13 +34,17 @@ export class DataAPI {
     this.db.list('planner').set(date, dailyPlanner);
   }
 
-  addRecipeToPlanner(recipe: Recipe, meal: 'breakfast' | 'lunch' | 'dinner', date = this.todayKey) {
-    this.db.list(`planner/${date}/${meal}`).push(recipe);
-  }
-
   getDailyPlanner(): Observable<DailyPlanner> {
     return this.db.object(`planner/${this.todayKey}`).valueChanges().pipe(map((payload) => {
       return new DailyPlanner(payload);
     }));
+  }
+
+  addRecipeToPlanner(recipe: Recipe, meal: MealTypes,    date = this.todayKey) {
+    this.db.list(`planner/${date}/${meal}`).push(recipe);
+  }
+
+  removeRecipeFromPlanner(recipe: Recipe, meal: MealTypes, date = this.todayKey): Promise<any> {
+    return this.db.object(`planner/${date}/${meal}/${recipe.id}`).remove();
   }
 }

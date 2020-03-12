@@ -20,7 +20,7 @@ export class DailyPlanner {
 
             if (meal === 'breakfast') {
               this.breakfast.push(recipe);
-            } else if(meal === 'lunch') {
+            } else if (meal === 'lunch') {
               this.lunch.push(recipe);
             } else {
               this.dinner.push(recipe);
