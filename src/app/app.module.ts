@@ -41,6 +41,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { PlannerComponent } from './planner/planner.component';
 import { EmptyPlaceholderComponent } from './planner/empty-placeholder/empty-placeholder.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DayViewComponent } from './planner/day-view/day-view.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PlannerComponent,
     EmptyPlaceholderComponent,
     NotFound404Component,
+    DayViewComponent,
   ],
   imports: [
     BrowserModule,

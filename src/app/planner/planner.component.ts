@@ -18,7 +18,7 @@ export class PlannerComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject();
   date: number = Date.now();
   dropdownRecipeList$: Observable<Recipe[]>;
-  dailyPlanner: DailyPlanner = null;
+  planner: DailyPlanner = null;
 
   selectedLayout = 0;
   plannerLayoutList = [
@@ -39,22 +39,15 @@ export class PlannerComponent implements OnInit, OnDestroy {
     this.dropdownRecipeList$ = this.recipeService.getRecipes();
 
     this.plannerService.plannerChange.pipe(takeUntil(this.unsubscribe$)).subscribe((planner: DailyPlanner) => {
-      this.dailyPlanner = planner;
+      this.planner = planner;
     });
   }
 
-  objectKeys(obj) {
-    return Object.keys(obj);
-  }
+
 
   // Ingredients from planner to Shopping List
   addToShoppingList() {
     this.plannerService.addIngredientsToShoppingList();
-  }
-
-  saveChangesToDailyPlanner() {
-    console.log('save planner');
-    this.plannerService.savePlanner();
   }
 
   removeRecipe( recipe: Recipe, meal: MealTypes) {
@@ -63,9 +56,9 @@ export class PlannerComponent implements OnInit, OnDestroy {
     });
   }
 
-  addRecipe(recipe: Recipe, meal: MealTypes) {
-    this.plannerService.addRecipe(meal, recipe);
-    this.api.addRecipeToPlanner(recipe, meal);
+  addRecipe(addedRecipe: {recipe: Recipe, meal: MealTypes}) {
+    this.plannerService.addRecipe(addedRecipe.meal, addedRecipe.recipe);
+    this.api.addRecipeToPlanner(addedRecipe.recipe, addedRecipe.meal);
   }
 
   ngOnDestroy() {
